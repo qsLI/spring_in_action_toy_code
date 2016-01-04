@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-@ComponentScan
+@ComponentScan("soundsystem")
+//@ComponentScan(basePackages = {"soundsystem", "another package") // only string not type safe
+//@ComponentScan(basePackageClasses = {CDPlayer.class, DVDPlayer.class}) //type safe one
 public class CDPlayerConfig {
 }

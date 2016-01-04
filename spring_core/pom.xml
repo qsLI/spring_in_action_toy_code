@@ -66,6 +66,12 @@
             <version>${spring-framework.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.stefanbirkner</groupId>
+            <artifactId>system-rules</artifactId>
+            <version>1.15.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>
