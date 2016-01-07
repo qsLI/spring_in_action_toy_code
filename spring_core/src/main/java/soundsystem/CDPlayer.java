@@ -25,7 +25,7 @@ public class CDPlayer implements MediaPlayer {
         this.cd = cd;
     }
 
-    @Autowired(required = false)//also fun; to avoid no matching exception just set required to false
+    @Autowired(required = false)//also fine; to avoid no matching exception just set required to false
     public void insertDisc(CompactDisc cd) {
         this.cd = cd;
     }
