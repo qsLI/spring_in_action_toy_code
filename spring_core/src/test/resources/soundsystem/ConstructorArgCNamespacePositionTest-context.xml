@@ -4,7 +4,13 @@
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--<bean id="compactDisc" class="soundsystem.SgtPeppers" />-->
+    <!--<bean id="cdPlayer" class="soundsystem.CDPlayer"-->
+          <!--c:_0-ref="compactDisc" />-->
+
+    <!--only one constructor argument, then we can just use c:_-ref-->
     <bean id="compactDisc" class="soundsystem.SgtPeppers" />
     <bean id="cdPlayer" class="soundsystem.CDPlayer"
-          c:_0-ref="compactDisc" />
+          c:_-ref="compactDisc" />
+
 </beans>
