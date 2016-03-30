@@ -4,7 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.runner.RunWith;
-import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -12,12 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by KL on 2016/2/1.
+ * Created by KL on 2016/3/30.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ConcertConfig.class)
-public class PerformanceTest {
-
+public class PerformanceTest2 {
     @Rule
     public final StandardOutputStreamLog log = new StandardOutputStreamLog();
 
@@ -27,16 +25,12 @@ public class PerformanceTest {
     @Autowired
     Performance concert;
 
-   @Test
+    @Test
     public void perform(){
-
-       AspectJProxyFactory factory = new AspectJProxyFactory(concert);
-       factory.addAspect(audience);
-       Performance performanceProxy = factory.getProxy();
-       performanceProxy.perform();
-       assertEquals("Silencing cell phones" + System.lineSeparator()
-                    + "Taking seats" + System.lineSeparator()
-                    + "performing..." + System.lineSeparator()
-                    + "CLAP CLAP CLAP !!!" + System.lineSeparator(), log.getLog());
-   }
+        concert.perform();
+        assertEquals("Silencing cell phones" + System.lineSeparator()
+                + "Taking seats" + System.lineSeparator()
+                + "performing..." + System.lineSeparator()
+                + "CLAP CLAP CLAP !!!" + System.lineSeparator(), log.getLog());
+    }
 }
