@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Created by KL on 2016/2/1.
  */
 
-@Aspect
+//@Aspect
 @Component
 public class Audience {
 
