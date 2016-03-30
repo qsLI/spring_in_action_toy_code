@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import soundsystem.CDPlayerConfig;
 
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 /**
@@ -31,6 +33,9 @@ public class PerformanceTest {
        factory.addAspect(audience);
        Performance performanceProxy = factory.getProxy();
        performanceProxy.perform();
-       assertEquals("", log.getLog());
+       assertEquals("Silencing cell phones" + System.lineSeparator()
+                    + "Taking seats" + System.lineSeparator()
+                    + "performing..." + System.lineSeparator()
+                    + "CLAP CLAP CLAP !!!" + System.lineSeparator(), log.getLog());
    }
 }
