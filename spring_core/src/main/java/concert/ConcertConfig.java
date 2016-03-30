@@ -14,7 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class ConcertConfig {
 
     @Bean
-    public Concert concert() {
+    public Performance concert() {
         return new Concert();
     }
 }
