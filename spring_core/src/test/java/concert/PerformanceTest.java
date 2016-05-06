@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.File;
+
+import static java.lang.System.lineSeparator;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -34,9 +38,9 @@ public class PerformanceTest {
        factory.addAspect(audience);
        Performance performanceProxy = factory.getProxy();
        performanceProxy.perform();
-       assertEquals("Silencing cell phones" + System.lineSeparator()
-                    + "Taking seats" + System.lineSeparator()
-                    + "performing..." + System.lineSeparator()
-                    + "CLAP CLAP CLAP !!!" + System.lineSeparator(), log.getLog());
+       assertEquals("Silencing cell phones" + lineSeparator()
+                    + "Taking seats" + lineSeparator()
+                    + "performing..." + lineSeparator()
+                    + "CLAP CLAP CLAP !!!" + lineSeparator(), log.getLog());
    }
 }
