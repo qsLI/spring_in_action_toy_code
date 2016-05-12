@@ -1,5 +1,6 @@
 package spittr;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
@@ -27,6 +28,10 @@ public class Spitter {
     @NotNull
     @Size(min = 2, max = 30)
     private String lastName;
+
+    @NotNull
+    @Email
+    private String email;
 
     public Spitter() {
     }
@@ -73,5 +78,12 @@ public class Spitter {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
