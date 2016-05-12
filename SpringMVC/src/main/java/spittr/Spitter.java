@@ -26,7 +26,7 @@ public class Spitter {
     private String firstName;
 
     @NotNull
-    @Size(min = 2, max = 3, message = "{lastName.size}")
+    @Size(min = 2, max = 30, message = "{lastName.size}")
     private String lastName;
 
     @NotNull
