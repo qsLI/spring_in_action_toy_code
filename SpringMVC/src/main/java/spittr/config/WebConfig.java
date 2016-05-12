@@ -47,7 +47,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
     public LocalValidatorFactoryBean validator() throws Exception {
         final LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-//        bean.setValidationMessageSource(messageSource());
+        bean.setValidationMessageSource(messageSource());
         bean.setProviderClass(HibernateValidator.class);
         return bean;
     }
@@ -55,7 +55,8 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
     public MessageSource messageSource() {
         final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/WEB-INF/messages/validation");
+        messageSource.setBasename("/ValidationMessages");
+        messageSource.setUseCodeAsDefaultMessage(false);
         messageSource.setCacheSeconds(3600);
         return messageSource;
     }
