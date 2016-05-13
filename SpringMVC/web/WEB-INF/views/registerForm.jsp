@@ -18,16 +18,18 @@
 <body>
 <h1>Register</h1>
 <sf:form method="post" commandName="spitter">
-    First Name: <sf:input path="firstName" />
-        <sf:errors path="firstName" cssClass="error"/> <br/>
-    Last  Name: <sf:input path="lastName"/>
-        <sf:errors path="lastName" cssClass="error"/> <br/>
+    <sf:errors path="*" element="div" cssClass="errors" />
+    <sf:label path="firstName" cssErrorClass="error">First Name:</sf:label>
+        <sf:input path="firstName" />
+
+    Last  Name: <sf:input path="lastName" cssErrorClass="error"/>
+
     Username: <sf:input path="username" />
-        <sf:errors path="Username" cssClass="error"/> <br/>
+
     Password: <sf:password path="password" />
-        <sf:errors path="password" cssClass="error"/> <br/>
+
     Email: <sf:input path="email" type="email" />
-        <sf:errors path="email" cssClass="error"/> <br/>
+
     <input type="submit" value="Register"/>
 </sf:form>
 </body>
