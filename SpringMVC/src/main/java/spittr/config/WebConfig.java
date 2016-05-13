@@ -14,7 +14,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 /**
  * Created by KL on 2016/5/6.
@@ -23,16 +26,41 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @EnableWebMvc // in spring 4 do the job for @AnnotationDrivenConfig
 @ComponentScan("spittr")
 public class WebConfig extends WebMvcConfigurerAdapter{
+//    @Bean
+//    public ViewResolver viewResolver() {
+////        InternalResourceViewResolver resolver =
+////                new InternalResourceViewResolver();
+////        resolver.setPrefix("/WEB-INF/views/");
+////        resolver.setSuffix(".jsp");
+////        resolver.setExposeContextBeansAsAttributes(true);
+////        return resolver;
+//        return new TilesViewResolver();
+//    }
+
     @Bean
-    public ViewResolver viewResolver() {
-//        InternalResourceViewResolver resolver =
-//                new InternalResourceViewResolver();
-//        resolver.setPrefix("/WEB-INF/views/");
-//        resolver.setSuffix(".jsp");
-//        resolver.setExposeContextBeansAsAttributes(true);
-//        return resolver;
-        return new TilesViewResolver();
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine);
+        return viewResolver;
     }
+
+    @Bean
+    public SpringTemplateEngine templateEngine(
+            TemplateResolver templateResolver) {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+        return templateEngine;
+    }
+
+    @Bean
+    public TemplateResolver templateResolver() {
+        TemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
+    }
+
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
