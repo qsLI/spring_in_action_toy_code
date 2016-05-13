@@ -1,0 +1,19 @@
+span.error {
+    color:red;
+}
+
+div.errors {
+    color:red;
+}
+
+label.error {
+    color:grey;
+}
+
+input.error {
+    background-color: aquamarine;
+}
+
+body {
+    background-image: url("/resources/images/spitter_logo_50.jpg");
+}
