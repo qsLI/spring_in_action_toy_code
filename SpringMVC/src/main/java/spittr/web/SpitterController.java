@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import spittr.Spitter;
 import spittr.data.SpitterRepository;
 
+import javax.servlet.http.Part;
 import javax.validation.Valid;
+import java.io.IOException;
 
 /**
  * Created by KL on 2016/5/8.
@@ -32,9 +32,17 @@ public class SpitterController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processRegistration(@Valid Spitter spitter, Errors errors) {
+    public String processRegistration(
+            @RequestPart("profilePicture") Part profilePicture,
+            @Valid Spitter spitter, Errors errors) {
         if (errors.hasErrors()) {
             return "registerForm";
+        }
+        try {
+            profilePicture.write("E:\\code\\Java\\spring_in_action_toy_code\\SpringMVC\\web\\resources\\images\\"
+                                + profilePicture.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         spitterRepository.save(spitter);
         return "redirect:/spitter/" + spitter.getUsername();
