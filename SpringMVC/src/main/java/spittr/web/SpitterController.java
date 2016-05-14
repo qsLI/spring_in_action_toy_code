@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spittr.Spitter;
 import spittr.data.SpitterRepository;
 
@@ -34,7 +35,9 @@ public class SpitterController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegistration(
             @RequestPart("profilePicture") Part profilePicture,
-            @Valid Spitter spitter, Errors errors) {
+            @Valid Spitter spitter,
+            Errors errors,
+            RedirectAttributes model) {
         if (errors.hasErrors()) {
             return "registerForm";
         }
@@ -45,14 +48,21 @@ public class SpitterController {
             e.printStackTrace();
         }
         spitterRepository.save(spitter);
-        return "redirect:/spitter/" + spitter.getUsername();
+//        return "redirect:/spitter/" + spitter.getUsername();
+        model.addAttribute("username", spitter.getUsername());
+        //because of the Model data will not survive a redirection, so use flashAttributes
+        //actually it is stored in session and will be cleaned by spring till the next request
+        model.addFlashAttribute(spitter);
+        return "redirect:/spitter/{username}";
     }
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public String showSpitterProfile(
             @PathVariable String username, Model model) {
-        Spitter spitter = spitterRepository.findByUsername(username);
-        model.addAttribute(spitter);
+        if(!model.containsAttribute("spitter")){
+            Spitter spitter = spitterRepository.findByUsername(username);
+            model.addAttribute(spitter);
+        }
         return "profile";
     }
 
