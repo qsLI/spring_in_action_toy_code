@@ -1,7 +1,7 @@
-package com.springincation.pizza.flow;
+package com.springinaction.pizza.flow;
 
-import com.springincation.pizza.domain.Pizza;
-import com.springincation.pizza.domain.Topping;
+import com.springinaction.pizza.domain.Topping;
+import com.springinaction.pizza.domain.Pizza;
 import org.apache.log4j.Logger;
 import org.springframework.webflow.execution.Action;
 import org.springframework.webflow.execution.Event;

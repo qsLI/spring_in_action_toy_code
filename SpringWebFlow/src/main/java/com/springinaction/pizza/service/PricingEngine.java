@@ -1,6 +1,6 @@
-package com.springincation.pizza.service;
+package com.springinaction.pizza.service;
 
-import com.springincation.pizza.domain.Order;
+import com.springinaction.pizza.domain.Order;
 
 /**
  * Created by KL on 2016/5/15.

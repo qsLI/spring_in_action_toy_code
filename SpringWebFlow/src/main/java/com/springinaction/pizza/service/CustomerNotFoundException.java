@@ -1,4 +1,4 @@
-package com.springincation.pizza.service;
+package com.springinaction.pizza.service;
 
 /**
  * Created by KL on 2016/5/15.

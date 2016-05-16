@@ -1,8 +1,8 @@
-package com.springincation.pizza.service;
+package com.springinaction.pizza.service;
 
-import com.springincation.pizza.domain.Order;
-import com.springincation.pizza.domain.Pizza;
-import com.springincation.pizza.domain.PizzaSize;
+import com.springinaction.pizza.domain.Order;
+import com.springinaction.pizza.domain.PizzaSize;
+import com.springinaction.pizza.domain.Pizza;
 import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;

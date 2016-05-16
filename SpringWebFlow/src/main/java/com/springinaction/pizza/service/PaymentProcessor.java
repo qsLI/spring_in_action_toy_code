@@ -1,6 +1,6 @@
-package com.springincation.pizza.service;
+package com.springinaction.pizza.service;
 
-import com.springincation.pizza.PaymentException;
+import com.springinaction.pizza.PaymentException;
 
 /**
  * Created by KL on 2016/5/15.

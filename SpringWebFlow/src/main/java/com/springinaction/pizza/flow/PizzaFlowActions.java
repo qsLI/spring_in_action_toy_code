@@ -1,13 +1,12 @@
-package com.springincation.pizza.flow;
+package com.springinaction.pizza.flow;
 
-import com.springincation.pizza.domain.*;
-import com.springincation.pizza.service.CustomerNotFoundException;
-import com.springincation.pizza.service.CustomerService;
+import com.springinaction.pizza.domain.*;
+import com.springinaction.pizza.service.CustomerNotFoundException;
+import com.springinaction.pizza.service.CustomerService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.springincation.pizza.domain.PaymentType.CREDIT_CARD;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 /**
@@ -35,7 +34,7 @@ public class PizzaFlowActions {
 
     public Payment verifyPayment(PaymentDetails paymentDetails) {
         Payment payment = null;
-        if (paymentDetails.getPaymentType() == CREDIT_CARD) {
+        if (paymentDetails.getPaymentType() == PaymentType.CREDIT_CARD) {
             payment = new CreditCardPayment();
         } else {
             payment = new CashOrCheckPayment();
@@ -47,7 +46,7 @@ public class PizzaFlowActions {
         LOGGER.warn("TODO: Flesh out the saveOrder() method.");
     }
 
-    public boolean checkDeliverArea(String zipCode) {
+    public boolean checkDeliveryArea(String zipCode) {
         LOGGER.warn("TODO: Flesh out the checkDeliverArea() method.");
         return "75075".equalsIgnoreCase(zipCode);
     }

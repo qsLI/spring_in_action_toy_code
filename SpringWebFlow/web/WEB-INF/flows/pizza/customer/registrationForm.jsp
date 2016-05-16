@@ -6,11 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html xmlns:jsp="http://java.sun.com/JSP/Page"
-      xmlns:form="http://www.springframework.org/tags/form"
-      xmlns:form="http://www.springframework.org/tags">
-<jsp:output omit-xml-declaration="yes"/>
-<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<html>
 <head>
     <title>Spizza</title>
 </head>

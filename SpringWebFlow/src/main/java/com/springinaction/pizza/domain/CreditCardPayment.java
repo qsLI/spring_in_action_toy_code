@@ -1,4 +1,4 @@
-package com.springincation.pizza.domain;
+package com.springinaction.pizza.domain;
 
 /**
  * Created by KL on 2016/5/15.

@@ -3,7 +3,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
     <var name="customer"
-        class="com.springincation.pizza.domain.Customer"/>
+        class="com.springinaction.pizza.domain.Customer"/>
 
     <view-state id="welcome">
         <transition on="phoneEntered" to="lookupCustomer"/>
@@ -13,7 +13,7 @@
         <evaluate result="customer" expression=
         "pizzaFlowActions.lookupCustomer(requestParameters.phoneNumber)"/>
         <transition to="registrationForm" on-exception=
-                "com.springincation.pizza.service.CustomerNotFoundException"/>
+                "com.springinaction.pizza.service.CustomerNotFoundException"/>
         <transition to="customerReady"/>
     </action-state>
 
@@ -25,7 +25,7 @@
         <transition on="submit" to="checkDeliveryArea"/>
     </view-state>
 
-    <decision-state id="checkDeliverArea">
+    <decision-state id="checkDeliveryArea">
         <if test="pizzaFlowActions.checkDeliveryArea(customer.zipCode)"
             then="addCustomer"
             else="deliveryWarning"/>

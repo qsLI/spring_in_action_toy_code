@@ -1,4 +1,4 @@
-package com.springincation.pizza.domain;
+package com.springinaction.pizza.domain;
 
 import java.io.Serializable;
 
