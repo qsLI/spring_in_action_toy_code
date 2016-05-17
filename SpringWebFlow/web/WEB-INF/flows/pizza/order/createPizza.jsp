@@ -6,32 +6,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div xmlns:jsp="http://java.sun.com/JSP/Page"
-      xmlns:form="http://www.springframework.org/tags/form"
-      xmlns:form="http://www.springframework.org/tags">
-<jsp:output omit-xml-declaration="yes"/>
-<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<html>
+<body>
+<div>
     <h2>Create Pizza</h2>
     <form:form commandName="pizza">
         <input type="hidden" name="_flowExecutionKey"
                value="${flowExecutionKey}"/>
-        <b>Size :</b><br/>
+        <b>Size :</b><br>
         <form:radiobutton path="size"
-                          label="Small (12-inch" value="SMALL"/><br/>
+                          label="Small (12-inch) " value="SMALL"/><br>
         <form:radiobutton path="size"
-                          label="Medium (14-inch" value="MEDIUM"/><br/>
+                          label="Medium (14-inch) " value="MEDIUM"/><br>
         <form:radiobutton path="size"
-                          label="Large (16-inch" value="LARGE"/><br/>
+                          label="Large (16-inch) " value="LARGE"/><br>
         <form:radiobutton path="size"
-                          label="Ginormous (20-inch" value="GINORMOUS"/>
-        <br/>
-        <br/>
-        <b>Toppings: </b><br/>
+                          label="Ginormous (20-inch) " value="GINORMOUS"/>
+        <br>
+        <br>
+        <b>Toppings: </b><br>
         <form:checkboxes path="toppings" items="${toppingsList}"
-                         delimiter="&lt;br/&gt;"/><br/><br/>
+                         delimiter="<br>"/><br><br>
         <input type="submit" class="button"
                name="_eventId_addPizza" value="Continue"/>
         <input type="submit" class="button"
                name="_eventId_cancel" value="Cancel"/>
     </form:form>
 </div>
+</body>
+</html>

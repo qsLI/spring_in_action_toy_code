@@ -7,7 +7,7 @@
 
     <view-state id="takePayment" model="flowScope.paymentDetails">
         <on-entry>
-            <set name="flowScope.paymentDetails" value="new com.springinaction.pizza.domain.PaymentDetails"/>
+            <set name="flowScope.paymentDetails" value="new com.springinaction.pizza.domain.PaymentDetails()"/>
             <evaluate result="viewScope.paymentTypeList" expression=
                     "T(com.springinaction.pizza.domain.PaymentType).asList()"/>
         </on-entry>

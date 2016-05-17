@@ -15,13 +15,13 @@
     <h2>Delivery Unavailable</h2>
     <p>The address is outside of our delivery area. You may still place
     the order, but you will need to pick it up yourself. </p>
-<jsp:text><![CDATA[
-    <a href="${flowExecutionUrl}&_eventId=accept">
+
+    <a href="<c:url value="${flowExecutionUrl}&_eventId=accept"/>">
         Continue, I'll pick up the order
-    </a>
-    <a href="${flowExecutionUrl}&_eventId=cancel">
+    </a> |
+    <a href="<c:url value="${flowExecutionUrl}&_eventId=cancel"/>">
         Never mind
     </a>
-    ]]></jsp:text>
+
 </body>
 </html>

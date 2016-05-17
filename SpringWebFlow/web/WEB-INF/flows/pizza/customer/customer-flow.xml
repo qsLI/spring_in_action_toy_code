@@ -32,7 +32,7 @@
     </decision-state>
 
     <view-state id="deliveryWarning">
-        <transition on="accepti" to="addCustomer"/>
+        <transition on="accept" to="addCustomer"/>
     </view-state>
 
     <action-state id="addCustomer">
