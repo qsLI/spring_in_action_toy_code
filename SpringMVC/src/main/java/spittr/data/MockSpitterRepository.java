@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Component
 public class MockSpitterRepository implements SpitterRepository{
-    private List<Spitter> spitters = new ArrayList<Spitter>();
+    private List<Spitter> spitters = new ArrayList<Spitter>(){{
+            add(new Spitter("Kevin","123456","Kevin","Leo"));
+    }};
+
     public Spitter save(Spitter spitter) {
         spitters.add(spitter);
         return spitter;

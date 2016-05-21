@@ -11,13 +11,10 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
@@ -30,23 +27,23 @@ import java.io.IOException;
 @EnableWebMvc // in spring 4 do the job for @AnnotationDrivenConfig
 @ComponentScan("spittr")
 public class WebConfig extends WebMvcConfigurerAdapter{
-//    @Bean
-//    public ViewResolver viewResolver() {
-////        InternalResourceViewResolver resolver =
-////                new InternalResourceViewResolver();
-////        resolver.setPrefix("/WEB-INF/views/");
-////        resolver.setSuffix(".jsp");
-////        resolver.setExposeContextBeansAsAttributes(true);
-////        return resolver;
-//        return new TilesViewResolver();
-//    }
-
     @Bean
-    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine);
-        return viewResolver;
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver resolver =
+                new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        resolver.setExposeContextBeansAsAttributes(true);
+        return resolver;
+//        return new TilesViewResolver();
     }
+
+//    @Bean
+//    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+//        viewResolver.setTemplateEngine(templateEngine);
+//        return viewResolver;
+//    }
 
     @Bean
     public SpringTemplateEngine templateEngine(
@@ -119,5 +116,10 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
     public MultipartResolver multipartResolver() throws IOException {
         return new StandardServletMultipartResolver();
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
     }
 }

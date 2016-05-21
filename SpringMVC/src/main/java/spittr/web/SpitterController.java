@@ -43,7 +43,7 @@ public class SpitterController {
         }
         try {
             profilePicture.write("E:\\code\\Java\\spring_in_action_toy_code\\SpringMVC\\web\\resources\\images\\"
-                                + profilePicture.getName());
+                                + profilePicture.getName() + ".jpg");
         } catch (IOException e) {
             e.printStackTrace();
         }
