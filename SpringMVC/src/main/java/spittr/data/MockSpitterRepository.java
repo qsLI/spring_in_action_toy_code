@@ -29,4 +29,9 @@ public class MockSpitterRepository implements SpitterRepository{
         }
         return null;
     }
+
+    @Override
+    public Spitter findOne(long id) {
+        return null;
+    }
 }

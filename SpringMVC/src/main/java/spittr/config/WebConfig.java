@@ -5,7 +5,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
@@ -18,6 +22,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 
 /**
@@ -122,4 +127,29 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
     }
+
+    @Profile("production")
+    @Bean
+    public JndiObjectFactoryBean dataSource() {
+        JndiObjectFactoryBean jndiObjectFB = new JndiObjectFactoryBean();
+        jndiObjectFB.setJndiName("jdbc/SpittrDS");
+        jndiObjectFB.setResourceRef(true);
+        jndiObjectFB.setProxyInterface(javax.sql.DataSource.class);
+        return jndiObjectFB;
+    }
+
+    @Bean
+    DataSource jdbcDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUrl("jdbc:mysql://localhost:3306/spittr");
+        dataSource.setUsername("root");
+        dataSource.setPassword("123455");
+        return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
 }
