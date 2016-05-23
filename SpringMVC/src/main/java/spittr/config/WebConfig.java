@@ -1,6 +1,7 @@
 package spittr.config;
 
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,8 +9,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jndi.JndiObjectFactoryBean;
+import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
@@ -24,6 +28,7 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Created by KL on 2016/5/6.
@@ -150,6 +155,36 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public NamedParameterJdbcTemplate namedJdbcTemplate(DataSource dataSource) {
+        return new NamedParameterJdbcTemplate(dataSource);
+    }
+
+    /**
+     *
+     * @param ds datasource
+     * @return hibernate sessionFactory
+     */
+    @Bean
+    public AnnotationSessionFactoryBean sessionFactoryBean(DataSource ds) {
+        AnnotationSessionFactoryBean sfb = new AnnotationSessionFactoryBean();
+        sfb.setDataSource(ds);
+        sfb.setPackagesToScan(new String[]{ "spittr.domain"});
+        Properties props = new Properties();
+        props.setProperty("dialect", "org.hibernate.dialect.H2Dialect");
+        sfb.setHibernateProperties(props);
+        return sfb;
+    }
+
+    /**
+     * add exception translation to a template-less Hibernate repository
+     * @return
+     */
+    @Bean
+    public BeanPostProcessor persistenceTranslation() {
+        return new PersistenceAnnotationBeanPostProcessor();
     }
 
 }
