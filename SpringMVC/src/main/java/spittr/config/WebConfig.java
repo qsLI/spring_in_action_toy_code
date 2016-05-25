@@ -148,6 +148,17 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         return jndiObjectFB;
     }
 
+    /**
+     * configure EntityManagerFactory bean via java configuration
+     * @return JndiObjectFactoryBean
+     */
+    @Bean
+    public JndiObjectFactoryBean entityManagerFactory() {
+        JndiObjectFactoryBean jndiObjectFB = new JndiObjectFactoryBean();
+        jndiObjectFB.setJndiName("jdbc/SpittrDS");
+        return jndiObjectFB;
+    }
+
     @Bean
     DataSource jdbcDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -211,6 +222,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
                 new LocalContainerEntityManagerFactoryBean();
         emfb.setDataSource(dataSource);
         emfb.setJpaVendorAdapter(jpaVendorAdapter);
+        emfb.setPackagesToScan("spittr.data");
         return emfb;
     }
 
@@ -223,5 +235,15 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         adapter.setDatabasePlatform("org.hibernate.dialect.HSQLDialect");
         return adapter;
     }
+
+    /**
+     * in order for spring to unserstand @PersistenceUnit annotation, must config PersistanceAnnotationBeanPostProcessor
+     * if <context:annotation-config> or <context:component-scan> is configured then there is no need.
+     */
+    @Bean
+    public PersistenceAnnotationBeanPostProcessor paPostProcessor() {
+        return new PersistenceAnnotationBeanPostProcessor();
+    }
+
 
 }
